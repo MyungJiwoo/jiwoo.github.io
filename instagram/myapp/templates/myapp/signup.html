@@ -95,7 +95,7 @@
                 <form method="POST">
                     {% csrf_token %}
                     <p class="login_user_name">
-                        <label for="user_name">사용자명:</label>
+                        <label for="user_name">아이디:</label>
                         {{ form.username }}
                         <!-- <label for="user_name">사용자명:</label>
                         <input type="text" id="user_name"> -->
@@ -110,7 +110,7 @@
                         {{ form.email }}
                     </p>
                     <p class="login_user_name">
-                        <label for="user_name">닉네임:</label>
+                        <label for="user_name">사용자명:</label>
                         {{ form.nickname }}
                     </p>
                     <p class="login_user_name">

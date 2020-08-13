@@ -9,7 +9,9 @@ from django.http import HttpResponse
 # Create your views here.
 
 def main(request):
-    posts = Post.objects.all()
+    if not request.user.is_active:
+        return HttpResponse('로그인이 필요한 서비스입니다.')
+    posts = Post.objects.order_by('-id')
     signin_form = SigninForm()
     comment_form = CommentForm()
     return render(request, 'myapp/main.html', {'posts': posts, 'signin_form': signin_form,
@@ -17,7 +19,7 @@ def main(request):
 
 def create(request):
     if not request.user.is_active:
-        return HttpResponse("Can't write a post without Sign In")
+        return HttpResponse('로그인이 필요한 서비스입니다.')
 
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
@@ -48,7 +50,7 @@ def create(request):
 def update(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if not request.user.is_active:
-        return HttpResponse('First SignIn please')
+        return HttpResponse('로그인이 필요한 서비스입니다.')
 
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES, instance=post)
@@ -94,7 +96,7 @@ def update(request, pk):
 def delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if not request.user.is_active:
-        return HttpResponse('First SignIn please')
+        return HttpResponse('로그인이 필요한 서비스입니다.')
     post.delete()
     return redirect('main')
 
@@ -131,7 +133,7 @@ def signup(request):
 
 def comment(request, post_id):
     if not request.user.is_active:
-        return HttpResponse("Can't write a post without Sign In")
+        return HttpResponse('로그인이 필요한 서비스입니다.')
     post = get_object_or_404(Post, id=post_id)
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -149,7 +151,7 @@ def hashtag(request, hashtag_name):
 
 def like(request, pk):
     if not request.user.is_active:
-        return HttpResponse('First SignIn please')
+        return HttpResponse('로그인이 필요한 서비스입니다.')
 
     post = get_object_or_404(Post, pk=pk)
     user = request.user

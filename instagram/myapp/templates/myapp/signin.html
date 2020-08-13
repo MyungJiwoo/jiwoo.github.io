@@ -63,7 +63,7 @@
 
 
             <div class="right_icons">
-                <a href="{% url 'create' %}"><div class="sprite_camera_icon"></div></a>
+                <!-- <a href="{% url 'create' %}"><div class="sprite_camera_icon"></div></a> -->
                 <!-- <a href="{% url 'signup' %}"><div class="sprite_compass_icon"></div></a> -->
                 <!-- {% if user.is_authenticated %}
                 <a href="{% url 'mypage' user_id=user.id %}"><div class="sprite_user_icon_outline"></div></a>
@@ -86,7 +86,7 @@
                 <form method="POST">
                     {% csrf_token %}
                     <p class="login_user_name">
-                        <label for="user_name">사용자명:</label>
+                        <label for="user_name">아이디:</label>
                         {{ form.username }}
                         <!-- <label for="user_name">사용자명:</label>
                         <input type="text" id="user_name"> -->
